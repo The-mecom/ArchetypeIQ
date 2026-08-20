@@ -163,6 +163,7 @@ Respond in JSON.`;
 
 export default defineConfig(() => {
   return {
+    base: './',
     plugins: [react(), tailwindcss(), geminiApiDevPlugin()],
     resolve: {
       alias: {
