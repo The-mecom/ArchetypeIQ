@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-grotesk: "Neue Haas Grotesk Text Pro", "Neue Haas Grotesk", "Neue Haas Unica", "Plus Jakarta Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-editorial: "Editorial New", "PP Editorial New", "Newsreader", "Playfair Display", Georgia, "Times New Roman", serif;
+  }
+
+  body {
+    font-family: var(--font-grotesk);
+    color: #0f172a;
+    background-color: #f8fafc;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, .font-editorial, .editorial-heading {
+    font-family: var(--font-editorial);
+    letter-spacing: -0.02em;
+  }
+}
+
+.font-editorial {
+  font-family: "Editorial New", "PP Editorial New", "Newsreader", "Playfair Display", Georgia, serif !important;
+}
+
+.font-grotesk {
+  font-family: "Neue Haas Grotesk Text Pro", "Neue Haas Grotesk", "Neue Haas Unica", "Plus Jakarta Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+/* Custom scrollbars */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

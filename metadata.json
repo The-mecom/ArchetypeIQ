@@ -1,0 +1,6 @@
+{
+  "name": "Hartman Color Code Archetype & Communication Studio",
+  "description": "Comprehensive psychological archetype assessment, deep personality insights based on Dr. Taylor Hartman's core motive framework, and personalized communication & relationship strategy playbooks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
