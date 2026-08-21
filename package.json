@@ -9,7 +9,7 @@
     "start": "tsx server.ts",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build && touch dist/.nojekyll",
     "deploy": "gh-pages -d dist",
     "lint": "tsc --noEmit"
   },
