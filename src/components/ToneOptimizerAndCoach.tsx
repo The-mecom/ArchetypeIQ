@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { COLOR_PROFILES } from '../data/hartmanProfiles';
 import { ColorCode } from '../types/personality';
+import { SIMULATOR_PRESETS, PersonaType } from '../data/simulatorPresets';
 import { 
   Wand2, 
   MessageSquare, 
@@ -92,8 +93,10 @@ export const ToneOptimizerAndCoach: React.FC<ToneOptimizerAndCoachProps> = ({
   const [apiError, setApiError] = useState<string | null>(null);
 
   // Simulator State
-  const [selectedScenarioIndex, setSelectedScenarioIndex] = useState(0);
-  const currentScenario = PRESET_SCENARIOS[selectedScenarioIndex];
+  const [simulatorColor, setSimulatorColor] = useState<ColorCode>('R');
+  const [simulatorPersona, setSimulatorPersona] = useState<PersonaType>('Boss');
+  const currentScenario = SIMULATOR_PRESETS.find(s => s.recipientColor === simulatorColor && s.persona === simulatorPersona) || SIMULATOR_PRESETS[0];
+
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([
     {
       id: 'init-1',
@@ -241,20 +244,20 @@ export const ToneOptimizerAndCoach: React.FC<ToneOptimizerAndCoachProps> = ({
         let score = 75;
 
         if (currentScenario.recipientColor === 'R') {
-          reply = 'That makes strategic sense. Give me the breakdown of the pilot launch by 2 PM. Don\'t let it slip.';
-          feedback = 'Good directness. You provided a concrete proposal without emotional fluff. State your recommended option first for maximum impact.';
+          reply = 'Alright, I hear your point. Just tell me what the concrete next step is and let\'s execute on it without delay.';
+          feedback = 'Good directness. You kept emotions out of it and focused on actionable outcomes. Red personalities respect strength and brevity.';
           score = 88;
         } else if (currentScenario.recipientColor === 'B') {
-          reply = 'Thank you for explaining that. It means a lot that you noticed how much effort went into tonight. Let\'s warm up the dinner.';
-          feedback = 'Excellent emotional resonance. You validated her feelings before explaining logistical details.';
+          reply = 'Thank you for taking the time to share that with me. It really helps me understand where we stand, and I appreciate your sincerity.';
+          feedback = 'Excellent emotional resonance. You validated their feelings and showed genuine care, which rebuilds trust with Blue personalities.';
           score = 92;
         } else if (currentScenario.recipientColor === 'W') {
-          reply = 'Thanks for giving me time to look it over. I think Option B is much safer for our team balance. Let\'s go with that.';
-          feedback = 'Great job removing the pressure. You gave him space and he made a clear decision.';
+          reply = 'Okay, that sounds fine. I appreciate that you are giving me space to process this without pushing for an immediate reaction.';
+          feedback = 'Great job removing the pressure. By not backing them into a corner, you allowed the White personality to engage safely.';
           score = 90;
         } else {
-          reply = 'Awesome! Let\'s streamline the slides and celebrate closing the deal on Friday!';
-          feedback = 'Great positive energy. You matched her enthusiasm while keeping the target clear.';
+          reply = 'Awesome! That sounds great to me. Let\'s keep this momentum going, I am totally on board!';
+          feedback = 'Great positive energy. You matched their enthusiasm and kept the interaction fun and optimistic, which engages Yellow personalities.';
           score = 86;
         }
 
@@ -276,9 +279,10 @@ export const ToneOptimizerAndCoach: React.FC<ToneOptimizerAndCoachProps> = ({
     }
   };
 
-  const handleSelectScenario = (index: number) => {
-    setSelectedScenarioIndex(index);
-    const scen = PRESET_SCENARIOS[index];
+  const handleSelectScenario = (color: ColorCode, persona: PersonaType) => {
+    setSimulatorColor(color);
+    setSimulatorPersona(persona);
+    const scen = SIMULATOR_PRESETS.find(s => s.recipientColor === color && s.persona === persona) || SIMULATOR_PRESETS[0];
     setChatHistory([
       {
         id: `init-${Date.now()}`,
@@ -537,36 +541,65 @@ export const ToneOptimizerAndCoach: React.FC<ToneOptimizerAndCoachProps> = ({
         /* Tab 2: Interactive Roleplay Simulator */
         <div className="space-y-4">
           {/* Scenario Selector */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
-            {PRESET_SCENARIOS.map((scen, idx) => {
-              const isSelected = selectedScenarioIndex === idx;
-              const p = COLOR_PROFILES[scen.recipientColor];
-              return (
-                <button
-                  key={scen.id}
-                  onClick={() => handleSelectScenario(idx)}
-                  className={`p-3 rounded-lg border text-left transition-all ${
-                    isSelected
-                      ? 'border-slate-900 bg-slate-900 text-white shadow-xs'
-                      : 'border-slate-200 bg-white hover:border-slate-300'
-                  }`}
-                >
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <span 
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: p.colorHex }}
-                    />
-                    <span className={`text-[10px] font-mono font-bold uppercase tracking-widest ${isSelected ? 'text-slate-300' : 'text-slate-500'}`}>
-                      {p.name} ({p.motive})
-                    </span>
-                  </div>
-                  <h4 className="font-bold text-xs line-clamp-1">{scen.title}</h4>
-                  <p className={`text-[11px] mt-0.5 line-clamp-2 ${isSelected ? 'text-slate-300' : 'text-slate-600'}`}>
-                    {scen.context}
-                  </p>
-                </button>
-              );
-            })}
+          <div className="bg-white rounded-lg border border-slate-200 shadow-xs p-4 flex flex-col md:flex-row gap-4 md:items-center justify-between">
+            <div className="flex-1">
+              <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">
+                1. Select Motive
+              </label>
+              <div className="flex gap-2">
+                {colorsList.map(c => {
+                  const p = COLOR_PROFILES[c];
+                  const isSelected = simulatorColor === c;
+                  return (
+                    <button
+                      key={c}
+                      onClick={() => handleSelectScenario(c, simulatorPersona)}
+                      className={`flex-1 p-2 text-xs font-bold rounded border transition-all flex items-center justify-center gap-1.5 ${
+                        isSelected ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
+                      }`}
+                    >
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: p.colorHex }} />
+                      <span className="hidden sm:inline">{p.name}</span>
+                      <span className="sm:hidden">{c}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            
+            <div className="flex-1">
+              <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">
+                2. Select Persona
+              </label>
+              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+                {(['Parent', 'Child', 'Partner', 'Colleague', 'Boss', 'Student'] as PersonaType[]).map(persona => {
+                  const isSelected = simulatorPersona === persona;
+                  return (
+                    <button
+                      key={persona}
+                      onClick={() => handleSelectScenario(simulatorColor, persona)}
+                      className={`px-3 py-2 shrink-0 text-xs font-medium rounded border transition-all ${
+                        isSelected ? 'bg-blue-50 text-blue-700 border-blue-200 font-bold' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                      }`}
+                    >
+                      {persona}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-xs">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0 mt-0.5" style={{ backgroundColor: COLOR_PROFILES[simulatorColor].colorHex }}>
+                {COLOR_PROFILES[simulatorColor].name[0]}
+              </div>
+              <div>
+                <h4 className="font-bold text-slate-900 text-sm sm:text-base">{currentScenario.title}</h4>
+                <p className="text-xs sm:text-sm text-slate-600 mt-1">{currentScenario.context}</p>
+              </div>
+            </div>
           </div>
 
           {/* Active Chat Interface */}
@@ -589,7 +622,7 @@ export const ToneOptimizerAndCoach: React.FC<ToneOptimizerAndCoachProps> = ({
               </div>
 
               <button
-                onClick={() => handleSelectScenario(selectedScenarioIndex)}
+                onClick={() => handleSelectScenario(simulatorColor, simulatorPersona)}
                 className="px-2.5 py-1 rounded text-xs font-semibold text-slate-600 hover:bg-slate-200 transition flex items-center gap-1"
               >
                 <RotateCcw className="w-3 h-3" />

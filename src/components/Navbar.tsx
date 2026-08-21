@@ -58,10 +58,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, hasResu
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <nav className="hidden lg:flex items-center gap-0 xl:gap-2 shrink-0">
             <button
               onClick={() => setActiveTab('assessment')}
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
+              className={`px-1 xl:px-3 py-2 text-[12px] xl:text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
                 activeTab === 'assessment' ? 'text-purple-700 font-semibold bg-purple-50/70' : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -73,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, hasResu
 
             <button
               onClick={() => setActiveTab('archetypes')}
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
+              className={`px-1 xl:px-3 py-2 text-[12px] xl:text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
                 activeTab === 'archetypes' ? 'text-purple-700 font-semibold bg-purple-50/70' : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -83,7 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, hasResu
 
             <button
               onClick={() => setActiveTab('communication')}
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
+              className={`px-1 xl:px-3 py-2 text-[12px] xl:text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
                 activeTab === 'communication' ? 'text-purple-700 font-semibold bg-purple-50/70' : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -93,19 +93,19 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, hasResu
 
             <button
               onClick={() => setActiveTab('coach')}
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
+              className={`px-1 xl:px-3 py-2 text-[12px] xl:text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
                 activeTab === 'coach' ? 'text-purple-700 font-semibold bg-purple-50/70' : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               <span>AI Coach</span>
-              <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-purple-100 text-purple-800 uppercase font-mono">
+              <span className="text-[9px] xl:text-[10px] font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800 uppercase font-mono">
                 AI
               </span>
             </button>
 
             <button
               onClick={() => setActiveTab('compatibility')}
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
+              className={`px-1 xl:px-3 py-2 text-[12px] xl:text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
                 activeTab === 'compatibility' ? 'text-purple-700 font-semibold bg-purple-50/70' : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -115,7 +115,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, hasResu
 
             <button
               onClick={() => setActiveTab('literature')}
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
+              className={`px-1 xl:px-3 py-2 text-[12px] xl:text-sm font-medium rounded-md transition-colors flex items-center gap-1 font-grotesk whitespace-nowrap ${
                 activeTab === 'literature' ? 'text-purple-700 font-semibold bg-purple-50/70' : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
@@ -136,7 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, hasResu
 
             <button
               onClick={() => setActiveTab('profiles')}
-              className="text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors hidden md:block px-2 py-1 font-grotesk whitespace-nowrap"
+              className="text-[13px] xl:text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors hidden xl:block px-1 xl:px-2 py-1 font-grotesk whitespace-nowrap"
             >
               Vault
             </button>
@@ -144,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, hasResu
             {/* Prominent Pill CTA Button */}
             <button
               onClick={() => setActiveTab('assessment')}
-              className="inline-flex items-center justify-center shrink-0 whitespace-nowrap px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold font-grotesk text-white bg-[#7c5295] hover:bg-[#6b4383] transition-all shadow-xs hover:shadow-sm active:scale-98 cursor-pointer"
+              className="inline-flex items-center justify-center shrink-0 whitespace-nowrap px-4 xl:px-5 py-2 xl:py-2.5 rounded-full text-[13px] xl:text-sm font-bold font-grotesk text-white bg-[#7c5295] hover:bg-[#6b4383] transition-all shadow-xs hover:shadow-sm active:scale-98 cursor-pointer"
             >
               <span>{hasResult ? 'View Result' : 'Take the test'}</span>
               <ArrowRight className="w-3.5 h-3.5 ml-1.5 shrink-0" />

@@ -146,7 +146,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
 
   if (!isStarted) {
     return (
-      <div className="max-w-3xl mx-auto py-8 sm:py-12 px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
         {/* Intro Card */}
         <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
           <div className="p-6 sm:p-10 space-y-6">
@@ -310,7 +310,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
   const estMinutesRemaining = Math.max(1, Math.ceil(remainingQuestions * 0.12));
 
   return (
-    <div className="max-w-2xl mx-auto py-8 sm:py-12 px-4 sm:px-6">
+    <div className="max-w-4xl mx-auto py-8 sm:py-12 px-4 sm:px-6">
       {/* Quiz Header & Soothing Smooth Progress */}
       <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5 sm:p-6 mb-6 transition-all">
         <div className="flex items-center justify-between mb-3 text-xs">

@@ -83,7 +83,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-grotesk text-slate-900 antialiased selection:bg-slate-900 selection:text-white">
+    <div className="min-h-screen w-full max-w-[100vw] bg-slate-50 flex flex-col font-grotesk text-slate-900 antialiased selection:bg-slate-900 selection:text-white overflow-x-hidden">
       {/* Top Main Navigation Bar */}
       <Navbar
         activeTab={activeTab}
